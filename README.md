@@ -34,23 +34,23 @@ Results for private MALDI MS:
 - R 3.6.3<br />
 
 ## Files
+The code we shared contains a total of three projects, namely...
 ### codes
-***after_calib.py***: An example of training label known dataset and computing four matrics on label unknown dataset after batch effect removal<br />
-***before_calib.py***: An example of training label known dataset and computing four matrics on label unknown dataset before calibration<br />
-***crossValidation.py***: 10 fold cross validation in “Subject” level and “Sample” level to request the upper bound of cross-batch prediction<br />
-***network.py***: Class definitions for three network architectures (Calibrator, Reconstructors, Discriminator) and loss function<br />
+***multi-reBatch.py***: An example of training label known datasets and computing accuracy on label unknown datasets after batch effect removal<br />
+***classify.py***: An example of training label known datasets and computing accuracy on label unknown datasets before calibration<br />
+***crossValidation-complex.py***: 10 fold cross validation to request the upper bound of cross-batch prediction<br />
+***network.py***: Class definitions for the architecture of each network (Calibrator, Reconstructors, Discriminator)<br />
 ***function.py***: Data preprocessing, definition of MMD and some functions that implement visualization<br />
-***alignment.py***: Peak alignment to ensure consistent number of features<br />
 
 ### data
 The dataset is organized in the data folder:<br />
-   ***"1.csv", "2.csv", "3.csv"***: Three batches of the MALDI MS data.<br />
-   ***"sample-num-1", "sample-num-2", "sample-num-3"***: Storing the number of samples corresponding to each subject in the corresponding file.<br />
-   ***"Person1Day1_baseline.csv", "Person1Day2_baseline.csv", "Person2Day1_baseline.csv", "Person2Day2_baseline.csv"***: Public CyTOF data whose "Day 1" and "Day 2" herald different batches.<br />
+   ***"1.csv", "2.csv", "3.csv"...***: Every batches of the data in the corresponding project.<br />
+   
+**NOTE:** Each project is runing in the corresponding directory. The loss curve can be viewed in the corresponding plots folder.<br />
 
 ## Run our codes
 1. Clone this git repository<br />   
-   `git clone https://github.com/n778509775/JDLBER.git`  <br />    
+   `git clone https://github.com/n778509775/NWCQ.git`  <br />    
    and install all the requirements listed above. Our operating environment is Ubuntu 16.04. You should **install all packages** required by the program as follows：   <br />   
    `sudo pip3 install -r requirement.txt`<br />   
    If only available for this user, please follow:<br />   
@@ -59,27 +59,20 @@ The dataset is organized in the data folder:<br />
    For individual packages like ‘tkinter’ that cannot be successfully installed by ‘pip’, please try:<br />    
    `sudo apt-get install python3-tk`  <br /> 
     <br />
-2. Fortunately, although our original collected sample data are not public, the preprocessed version is shared in the data folder. This version has conducted **feature matching**, that is, the number of features of the same data type is equal.<br />   
-   If the number of features you are processing is not equal, please carry out peak alignment and run the script below:<br /> 
+2. If you consider viewing classification results **before batch effect calibration**, you could run:   <br />    
+   `python classify.py --data_folder your_data_path --dataset_file_list file_name_1 file_name_2 file_name_3...` <br />    
+   For example, assuming you are currently in the MI directory, please execute：<br />   
+   `python classify.py --dataset_file_list 2.csv 3.csv 1.csv` <br />
    <br />
-   `python alignment.py --data_path your_data_path --target target_file_name --source source_file_name`<br /> 
-   <br />
-3. In order to obtain the upper bound of **cross-validation**, we could conduct 10 fold in-batch cross validation at both sample and subject levels:   <br />    
-    `python crossValidation.py --data_folder your_data_path --train_file file_name`  <br />    
-    example：<br />   
-    `python crossValidation.py --train_file Person1Day1_baseline.csv --num_epochs 15` <br />
+3. If you consider viewing classification results **after batch effect calibration**, you could run:   <br />      
+   `python multi-reBatch.py --data_folder your_data_path --dataset_file_list file_name_1 file_name_2 file_name_3...` <br />   
+   For example, assuming you are currently in the CHD directory, please execute：<br />   
+   `python multi-reBatch.py --dataset_file_list 3.csv 4.csv 1.csv 2.csv`<br />     
+4. In order to obtain the upper bound of **cross-validation**, we could conduct 10 fold in-batch cross validation:   <br />    
+    `python crossValidation-complex.py --data_folder your_data_path --train_file file_name`  <br />    
+    For example, assuming you are currently in the MI directory, please execute：<br />   
+    `python crossValidation-complex.py --train_file 1.csv` <br />
     <br />
-4. If you consider viewing classification results **before batch effect calibration**, you could run:   <br />    
-   `python before_calib.py --data_folder your_data_path --train_file file_name_1 --test_file file_name_2` <br />    
-   example：<br />   
-   `python before_calib.py --MALDI_MS --train_file 3.csv --test_file 2.csv --base_lr 1e-3` <br />
-   <br />
-5. If you consider viewing classification results **after batch effect calibration**, you could run:   <br />      
-   `python after_calib.py --data_folder your_data_path --train_file file_name_1 --test_file file_name_2` <br />   
-   example：<br />   
-   `python after_calib.py --MALDI_MS --train_file 3.csv --test_file 2.csv --batch_size 200`<br />     
-   
-**NOTE:** All the codes are runing in JDLBER directory, and the data should be placed in the data folder. The loss curve can be viewed in the plots folder.<br />
 
 ## Citation
 If you find this work useful for your research, please consider citing our article.
