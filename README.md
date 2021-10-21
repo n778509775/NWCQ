@@ -1,40 +1,21 @@
 # NWCQ
-## Joint Deep Learning for Batch Effect Removal and Classification Based on Metabolomics
+## Deep learning based multi-batch calibration for classification in various omics
 
-Codes and data for using our method, a novel end-to-end deep learning framework for improving diagnostic accuracy by batch-effect calibration in metabolomics data.
+Codes and data for using our method, a novel deep learning framework for improving classification accuracy by multi-batch effect calibration in various omics data.
 
 ## Abstract
-Metabolomics occupies an important position in both clinical diagnosis performance and basic researches for metabolic signatures and biomarkers. However, batch effects may occur if two technicians are responsible for different subsets of the experiments or if two different lots of reagents, chips or instruments are used. If not properly dealt with, batch effects can subsequently leads to serious concerns about the validity of the biological conclusions.<br />
-To fully improve the accuracy of diagnosis for distinguishing between patients and healthy people better, it is necessary to remove the bias caused by the experimental environment. We present a novel end-to-end deep learning framework, which consists of three networks, namely calibrator network, reconstructor(s) and discriminator. We demonstrate that our algorithm outperforms existing methods for removing batch effects in public CyTOF and private MALDI MS datasets.
-
-## Data
-**Public CyTOF:** CyTOF is a mass cytometry technology that allows simultaneous measurements of multiple biomarkers in each cell of a specimen. We perform our experiments on a subset of the publicly available data used in Uri Shaham. Peripheral Blood Mononuclear Cells (PBMCs) were collected from two sclerosis patients that were thawed in two batches (on two different days) and incubated with or without some kind of ionomycin marks. All samples had dimension d = 25 and contained 1400-5000 cells each. 
-
-**Private MALDI MS:** Another set of experiments were carried out based on the laser desorption/ionization mass spectrometry (LDI MS) detection results of serum samples. All the serum samples, including healthy controls and systemic lupus erythematosus (SLE) patients were collected according to standard procedures from RenJi hospital, School of Medicine, Shanghai Jiao Tong University. 
-
-## Method
-We propose a joint deep learning framework to calibrate batch effect first and then conduct sample classification (e.g., to derive disease diagnosis). Our framework consists of three major branches: (1) a calibrator to minimize the dissimilarity between different batches; (2) reconstructor(s) to guarantee that the sample data can be fully recovered after calibrating batch effect, which assures the fidelity of data processing in our framework; and (3) a discriminator to predict the labels of samples given their calibrated data. The loss function we optimized contains three components: the reconstruction loss between the input and output of the encoder-decoder backbone, the MMD-based loss between the codes of two batches, and classification loss between predictions and true labels. Our framework is shown in figure below.
+Computational analysis of high-throughput omics data has become popular over recent decades. However, classification accuracy is plagued with domain discrepancy caused by batch effect. To fully address issues that were not solved by conventional methods, we propose a joint deep learning framework for integrating batch effect removal and classification upon various omics data and demonstrate that our algorithm outperforms existing methods for improving classification accuracy in two private MALDI MS datasets and one public scRNA-seq dataset. The main contribution of this work lies that we conduct adversarial training by “walk-in two steps” strategy. Our framework is shown in figure below.<br />
 
 ![](illustration/network.png)
 
-## Results
-We apply the proposed method to two applications of CyTOF and MALDI MS, respectively, and demonstrate superior performance in achieving not only good batch effect removal but also satisfactory classification capability. 
-Results for public CyTOF: 
-
-![](illustration/CyTOF.png)
-
-Results for private MALDI MS:
-
-![](illustration/MALDI-MS.png)
-
 ## Dependencies
 - Python 3.6.8<br />
-- PyTorch 1.3.1<br />
+- PyTorch 1.8.1+cu102 <br />
 - Sklearn 0.21.3<br />
-- R 3.6.3<br />
+- R 4.0.4<br />
 
 ## Files
-The code we shared contains a total of three projects, namely...
+The code we shared contains a total of three projects, which are contained in the MI, CHD and scRNA-seq folders, respectively. The potential .py source files contained in these folders are listed below, of which "crossValidation-complex.py" is only available in the MI project.
 ### codes
 ***multi-reBatch.py***: An example of training label known datasets and computing accuracy on label unknown datasets after batch effect removal<br />
 ***classify.py***: An example of training label known datasets and computing accuracy on label unknown datasets before calibration<br />
@@ -43,8 +24,9 @@ The code we shared contains a total of three projects, namely...
 ***function.py***: Data preprocessing, definition of MMD and some functions that implement visualization<br />
 
 ### data
-The dataset is organized in the data folder:<br />
+As for our private MALDI MS data, although our original collected sample data are not public, the preprocessed versions belong to the first two projects are shared in the corresponding data folder:<br />
    ***"1.csv", "2.csv", "3.csv"...***: Every batches of the data in the corresponding project.<br />
+The public scRNA-seq dataset can be obtained directly from the published link in the original text, and we also provide the corresponding GEO number in the article.
    
 **NOTE:** Each project is runing in the corresponding directory. The loss curve can be viewed in the corresponding plots folder.<br />
 
