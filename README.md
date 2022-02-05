@@ -1,12 +1,12 @@
 # NWCQ
-## Deep learning based multi-batch calibration for classification in various omics
+## Multi-batch calibration led by deep learning for classification and pathway activities in MALDI MS based metabolomics
 
-Codes and data for using our method, a novel deep learning framework for improving classification accuracy by multi-batch effect calibration in various omics data.
+Codes and data for using our method, a novel deep learning framework for improving classification accuracy by multi-batch effect calibration in MALDI MS based metabolomics data.
 
 ## Abstract
-Computational analysis of high-throughput omics data has become popular over recent decades. However, classification accuracy is plagued with domain discrepancy caused by batch effect. To fully address issues that were not solved by conventional methods, we propose a joint deep learning framework for integrating batch effect removal and classification upon various omics data and demonstrate that our algorithm outperforms existing methods for improving classification accuracy in two private MALDI MS datasets and one public scRNA-seq dataset. The main contribution of this work lies that we conduct adversarial training by “walk-in two steps” strategy. Our framework is shown in figure below.<br />
+Computational analysis of high-throughput omics data has become popular over recent decades. However, classification accuracy is plagued with domain discrepancy caused by batch effect. To fully address issues that were not solved by conventional methods, we propose a joint deep learning framework for integrating batch effect removal and classification upon biological data and demonstrate that our algorithm outperforms existing methods for improving classification accuracy in two MALDI MS datasets. The main contribution of this work lies that we conduct adversarial training by “walk-in two steps” strategy. Our framework is shown in figure below.<br />
 
-![](scRNA-seq/data/network.png)
+![](CHD/data/network.png)
 
 ## Dependencies
 - Python 3.6.8<br />
@@ -15,7 +15,7 @@ Computational analysis of high-throughput omics data has become popular over rec
 - R 4.0.4<br />
 
 ## Files
-The code we shared contains a total of three projects, which are contained in the MI, CHD and scRNA-seq folders, respectively. The potential .py source files contained in these folders are listed below, of which "crossValidation-complex.py" is only available in the MI project.
+The code we shared contains a total of two projects, which are contained in the MI and CHD folders, respectively. The potential .py source files contained in these folders are listed below, of which "crossValidation-complex.py" is only available in the MI project.
 ### codes
 ***multi-reBatch.py***: An example of training label known datasets and computing accuracy on label unknown datasets after batch effect removal<br />
 ***classify.py***: An example of training label known datasets and computing accuracy on label unknown datasets before calibration<br />
@@ -24,9 +24,8 @@ The code we shared contains a total of three projects, which are contained in th
 ***function.py***: Data preprocessing, definition of MMD and some functions that implement visualization<br />
 
 ### data
-As for our private MALDI MS data, although our original collected sample data are not public, the preprocessed versions belong to the first two projects are shared in the corresponding data folder:<br />
+As for our two MALDI MS data, although our original collected sample data are not public, the preprocessed versions belong to the first two projects are shared in the corresponding data folder:<br />
    ***"1.csv", "2.csv", "3.csv"...***: Every batches of the data in the corresponding project.<br />
-The public scRNA-seq dataset can be obtained directly from the published link in the original text, and we also provide the corresponding GEO number in the article.
    
 **NOTE:** Each project is runing in the corresponding directory. The loss curve can be viewed in the corresponding plots folder.<br />
 
