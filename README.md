@@ -6,7 +6,7 @@ Codes and data for using our method, a novel deep learning framework for improvi
 ## Abstract
 Computational analysis of high-throughput omics data has become popular over recent decades. However, classification accuracy is plagued with domain discrepancy caused by batch effect. To fully address issues that were not solved by conventional methods, we propose a joint deep learning framework for integrating batch effect removal and classification upon biological data and demonstrate that our algorithm outperforms existing methods for improving classification accuracy in two MALDI MS datasets. The main contribution of this work lies that we conduct adversarial training by “walk-in two steps” strategy. Our framework is shown in figure below.<br />
 
-![](CHD/data/network.png)
+![](CHD/plots/network.png)
 
 ## Dependencies
 - Python 3.6.8<br />
