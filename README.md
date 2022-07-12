@@ -56,5 +56,5 @@ As for our two MALDI MS data, although our original collected sample data are no
     <br />
 
 ## Citation
-If you find this work useful for your research, please consider citing our article.
+If you find this work useful for your research, please consider citing our article.<br />
 Niu, J., Xu, W., Wei, D., Qain, K., Wang, Q. Deep learning framework for integrating multi-batch calibration, classification and pathway activities. Anal. Chem. 2022, 94, 25, 8937–8946. https://doi.org/10.1021/acs.analchem.2c00601.
